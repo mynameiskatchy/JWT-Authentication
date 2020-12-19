@@ -30,4 +30,12 @@ app.post('/login', (req, res) => {
     res.json({ accessToken: accessToken })
 })
 
+function authenticateToken(req, res, next) {
+    // Check if we have a valid token
+    const authHeader = req.headers['authorization']
+    const token = authHeader && authHeader.split(' ')[1]
+    if (token == null) return res.sendStatus(401)
+
+}
+
 app.listen(3000)

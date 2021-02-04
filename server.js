@@ -17,8 +17,7 @@ const posts = [
     }
 ]
 
-app.get('/posts', (req, res) => {
-    // Only return post that user has access to
+app.get('/posts', authenticateToken, (req, res) => {
     res.json(posts.filter(post => post.username === req.user.name))
 })
 

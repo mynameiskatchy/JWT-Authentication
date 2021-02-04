@@ -21,8 +21,6 @@ app.get('/posts', authenticateToken, (req, res) => {
     res.json(posts.filter(post => post.username === req.user.name))
 })
 
-
-
 function authenticateToken(req, res, next) {
     // Check if we have a valid token
     const authHeader = req.headers['authorization']

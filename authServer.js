@@ -23,6 +23,12 @@ app.post('/token', (req, res) => {
     })
 })
 
+app.delete('/logout', (req, res) => {
+    // reset array here, otherwise would need to delete from db
+    refreshTokens = refreshTokens.filter(token => token !== req.body.token)
+    res.sendStatus(204) // we've successfully deleted this token
+})
+
 app.post('/login', (req, res) => {
     // Authenticate User
     const username = req.body.username
@@ -31,11 +37,11 @@ app.post('/login', (req, res) => {
     const accessToken = generateAccessToken(user)
     const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET)
     refreshTokens.push(refreshToken)
-    
+
     res.json({ accessToken: accessToken, refreshToken: refreshToken })
 })
 
 function generateAccessToken(user) {
-   return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15s' })
+   return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '30s' })
 }
 app.listen(4000)

@@ -14,3 +14,8 @@ impliment refresh tokens
 take authentication server, move it outside of our other server
 we have on server that handles all out creation of tokens & refreshing of tokens
 and other server to handle specific case of getting post, saving post, api related tasks (everything but authentication)
+
+
+deauthenticate refresh tokens
+
+status codes
